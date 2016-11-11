@@ -1,9 +1,10 @@
 ---
 - hosts: localhost
   remote_user: root
-#  tasks:
-#    - include: ../tasks/main.yml
+  vars:
+    curl_path: "/tmp"
   roles:
+    - geerlingguy.git
     - role_under_test
 
 
