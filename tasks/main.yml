@@ -6,8 +6,8 @@
     name: "{{ item }}"
     state: present
   with_items:
-    - build-essential
     - gcc
+    - libcurl4-openssl-dev
     - make
 
 - name: "CURL | Set version to default"
@@ -84,6 +84,10 @@
   shell: /usr/local/bin/curl --version | cat
   register: curl_version_after
   when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
+
+- name: "CURL | Debug"
+  debug:
+    msg: "{{ curl_version_after }}"
 
 - name: "CURL | Verify current version"
   assert:
