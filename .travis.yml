@@ -6,6 +6,9 @@ env:
   - distro: centos7
     init: /usr/lib/systemd/systemd
     run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - distro: ubuntu1204
+    init: /sbin/init
+    run_opts: ""
   - distro: ubuntu1404
     init: /sbin/init
     run_opts: ""
@@ -39,7 +42,7 @@ script:
   - >
     tail ${idempotence}
     | grep -q 'changed=9.*failed=0'
-    && (echo 'Idempotence test: pass' && exit 0)
+    && (echo 'Idempotence test: ok' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
 
 notifications:
