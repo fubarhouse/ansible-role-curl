@@ -1,0 +1,82 @@
+---
+# tasks file for ansible-role-curl
+
+- name: "CURL | Set version to default"
+  set_fact:
+    curl_version: "7.51.0"
+  when: curl_version is undefined
+
+- name: "CURL | Set archive type to default"
+  set_fact:
+    curl_extension: "tar.gz"
+  when: curl_extension is undefined
+
+- name: "CURL | Get current version"
+  shell: curl --version
+  register: curl_version_before
+  changed_when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
+
+- name: "CURL | create directory"
+  file:
+    path: "../curl/curl-{{ curl_version }}"
+    state: directory
+    mode: 0777
+  when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
+
+- name: "CURL | Download"
+  get_url:
+    url: "https://curl.haxx.se/download/curl-{{ curl_version }}.{{ curl_extension }}"
+    dest: "../curl/{{ curl_version }}.{{ curl_extension }}"
+    remote_src: yes
+  when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
+
+# Note: requires GNU-Tar &&|| unzip
+- name: "CURL | Unarchive"
+  unarchive:
+    src: "../curl/{{ curl_version }}.{{ curl_extension }}"
+    dest: "../curl/"
+    creates: "../curl/curl-{{ curl_version }}/README"
+    remote_src: yes
+  when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
+
+- name: "CURL | Configure"
+  shell: "./configure"
+  args:
+    chdir: "../curl/curl-{{ curl_version }}"
+  when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
+
+# @TODO Use make module
+- name: "CURL | Make"
+  shell: "make"
+  args:
+    chdir: "../curl/curl-{{ curl_version }}"
+  when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
+
+# @TODO Use make module, make it optional via variable, and implement.
+#- name: "CURL | Make (Test)"
+#  become: yes
+#  become_user: root
+#  make test (optional)
+
+# @TODO Use make module
+- name: "CURL | Install"
+  shell: "make install"
+  args:
+    chdir: "../curl/curl-{{ curl_version }}"
+  when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
+
+- name: "CURL | Get current version"
+  shell: /usr/local/bin/curl --version
+  register: curl_version_after
+  when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
+
+- name: "CURL | Verify current version"
+  assert:
+    that: '"{{ curl_version }}" in "{{ curl_version_after.stdout }}"'
+  when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
+
+- name: "CURL | Cleaning"
+  file:
+    path: "../curl"
+    state: absent
+  when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
