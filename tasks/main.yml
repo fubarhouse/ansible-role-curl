@@ -88,10 +88,10 @@
 - name: "CURL | Verify current version"
   assert:
     that: '"{{ curl_version }}" in "{{ curl_version_after.stdout }}"'
-  when: '"curl {{ curl_version }}" not in "{{ curl_version_after.stdout_lines }}"'
+  when: 'curl_version_after is defined and "curl {{ curl_version }}" not in "{{ curl_version_after.stdout_lines }}"'
 
 - name: "CURL | Cleaning"
   file:
     path: "{{ curl_path }}/curl"
     state: absent
-  when: '"curl {{ curl_version }}" not in "{{ curl_version_after.stdout_lines }}"'
+  when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
