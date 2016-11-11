@@ -8,6 +8,7 @@
     - gcc
     - libcurl4-openssl-dev
     - make
+    - tar
   when: '"{{ ansible_os_family }}" == "Debian"'
 
 - name: "CURL | Ensure RedHat dependencies are installed"
@@ -17,4 +18,5 @@
   with_items:
     - gcc
     - make
+    - tar
   when: '"{{ ansible_os_family }}" == "RedHat"'
