@@ -1,6 +1,11 @@
 ---
 # tasks file for ansible-role-curl
 
+- name: "CURL | Ensure GCC is installed"
+  package:
+    name: gcc
+    state: present
+
 - name: "CURL | Set version to default"
   set_fact:
     curl_version: "7.51.0"
