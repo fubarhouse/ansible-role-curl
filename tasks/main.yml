@@ -4,6 +4,7 @@
 - name: "CURL | Detect installations"
   shell: $(which curl) --version | cat
   register: which_curl
+  ignore_errors: yes
 
 - name: "CURL | Set version to default"
   set_fact:

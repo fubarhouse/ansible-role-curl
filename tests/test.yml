@@ -1,9 +1,9 @@
 ---
 - hosts: localhost
   remote_user: root
-  tasks:
-    - include: ../tasks/main.yml
-#  roles:
-#    - role_under_test
+#  tasks:
+#    - include: ../tasks/main.yml
+  roles:
+    - role_under_test
 
 
