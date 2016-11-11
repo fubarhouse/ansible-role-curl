@@ -7,7 +7,6 @@
     state: present
   with_items:
     - gcc
-    - libcurl4-openssl-dev
     - make
 
 - name: "CURL | Set version to default"
@@ -17,7 +16,7 @@
 
 - name: "CURL | Set path to default"
   set_fact:
-    curl_path: ".."
+    curl_path: "/tmp"
   when: curl_path is undefined
 
 - name: "CURL | Set archive type to default"

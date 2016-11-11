@@ -16,6 +16,11 @@
 
 ## Role Variables
 
+Select location to install temporary data whilst installing curl
+````
+curl_path: /tmp
+````
+
 Select which version to install, or accept the default below:
 ````
 curl_version: "7.51.0"
