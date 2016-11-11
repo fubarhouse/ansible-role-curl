@@ -4,7 +4,6 @@
 - name: "CURL | Detect installations"
   shell: $(which curl) --version | cat
   register: which_curl
-  ignore_errors: yes
 
 - name: "CURL | Set version to default"
   set_fact:
@@ -17,7 +16,7 @@
   when: curl_extension is undefined
 
 - name: "CURL | Get current version"
-  shell: curl --version
+  shell: curl --version | cat
   register: curl_version_before
   changed_when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
 
