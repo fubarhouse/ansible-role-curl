@@ -5,18 +5,13 @@
 * Designed for systems lacking Curl, or systems wanting a specific version of curl.
 * Builds and Installs specified Curl from [released source](https://curl.haxx.se/download/).
 
-## Development state
-
-  This role is still under development, please use at own risk.
-  It has only been tested so far on OSX Sierra, unless Travis says otherwise.
-
 ## Requirements
 
-  None known, but we're still looking into a complete list.
+  None.
 
 ## Role Variables
 
-Select location to install temporary data whilst installing curl
+Select location to install temporary, or accept the default below:
 ````
 curl_path: /tmp
 ````
