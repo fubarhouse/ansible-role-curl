@@ -26,6 +26,11 @@ Select which archive type to download/extract, or accept the default below:
 curl_extension: "tar.gz"
 `````
 
+If you want to build from git source code, ensure the following boolean is true:
+````
+curl_buildfromgit: True
+````
+
 ## Dependencies
 
   None.
