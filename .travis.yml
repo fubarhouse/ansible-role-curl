@@ -45,11 +45,22 @@ script:
   # Test role idempotence.
   - idempotence=$(mktemp)
   - docker exec "$(cat ${container_id})" ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml | tee -a ${idempotence}
+
+  # Building from source release
+
   - >
     tail ${idempotence}
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: ok' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
+
+  # Building from git source
+
+  # - >
+  #   tail ${idempotence}
+  #   | grep -q 'ok=17.*changed=10.*failed=0'
+  #   && (echo 'Idempotence test: ok' && exit 0)
+  #   || (echo 'Idempotence test: fail' && exit 1)
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
