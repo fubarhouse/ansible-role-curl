@@ -4,10 +4,20 @@
 - name: "CURL | Include Dependency tasks"
   include: "dependencies.yml"
 
+- name: "CURL | Set to Source release by default"
+  set_fact:
+    curl_buildfromgit: False
+  when: curl_buildfromgit is undefined
+
 - name: "CURL | Set version to default"
   set_fact:
     curl_version: "7.51.0"
   when: curl_version is undefined
+
+- name: "CURL | Set version to master"
+  set_fact:
+    curl_version: "master"
+  when: curl_buildfromgit
 
 - name: "CURL | Set path to default"
   set_fact:
@@ -31,7 +41,15 @@
     mode: 0777
   when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
 
-- name: "CURL | Download"
+- name: "CURL | Download from git"
+  get_url:
+    url: "https://github.com/curl/curl/archive/{{ curl_version }}.{{ curl_extension }}"
+    dest: "{{ curl_path }}/curl/{{ curl_version }}.{{ curl_extension }}"
+    remote_src: yes
+    validate_certs: False
+  when: 'curl_version == "master"'
+
+- name: "CURL | Download from source"
   get_url:
     url: "https://curl.haxx.se/download/curl-{{ curl_version }}.{{ curl_extension }}"
     dest: "{{ curl_path }}/curl/{{ curl_version }}.{{ curl_extension }}"
@@ -48,8 +66,14 @@
     remote_src: yes
   when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
 
+- name: "CURL | Build Configuration"
+  shell: "./buildconf"
+  args:
+    chdir: "{{ curl_path }}/curl/curl-{{ curl_version }}"
+  when: 'curl_version == "master"'
+
 - name: "CURL | Configure"
-  shell: "./configure"
+  shell: "./configure  --disable-shared"
   args:
     chdir: "{{ curl_path }}/curl/curl-{{ curl_version }}"
   when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
@@ -82,7 +106,12 @@
 - name: "CURL | Verify current version"
   assert:
     that: '"{{ curl_version }}" in "{{ curl_version_after.stdout }}"'
-  when: 'curl_version_after is defined and "curl {{ curl_version }}" not in "{{ curl_version_after.stdout_lines }}"'
+  when: 'curl_version != "master" and curl_version_after is defined and "curl {{ curl_version }}" not in "{{ curl_version_after.stdout_lines }}"'
+
+- name: "CURL | Verify current version"
+  assert:
+    that: '"-DEV" in "{{ curl_version_after.stdout }}"'
+  when: 'curl_version == "master"'
 
 - name: "CURL | Cleaning"
   file:
