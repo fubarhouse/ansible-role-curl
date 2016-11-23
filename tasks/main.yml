@@ -72,11 +72,17 @@
     chdir: "{{ curl_path }}/curl/curl-{{ curl_version }}"
   when: 'curl_version == "master"'
 
-- name: "CURL | Configure"
-  shell: "./configure  --disable-shared"
+- name: "CURL | Configure without flags"
+  shell: "./configure"
   args:
     chdir: "{{ curl_path }}/curl/curl-{{ curl_version }}"
-  when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
+  when: 'curl_configure_flags.0 is undefined and "curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
+
+- name: "CURL | Configure with flags"
+  shell: "./configure --{{ curl_configure_flags|join(' --') }}"
+  args:
+    chdir: "{{ curl_path }}/curl/curl-{{ curl_version }}"
+  when: 'curl_configure_flags.0 is defined and "curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
 
 # @TODO Use make module
 - name: "CURL | Make"

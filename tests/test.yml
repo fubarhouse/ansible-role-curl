@@ -1,6 +1,10 @@
 ---
 - hosts: localhost
   remote_user: root
+  vars:
+    curl_configure_flags:
+      - disable-shared
+      - with-ssl
   roles:
     - geerlingguy.git
     - role_under_test
