@@ -50,7 +50,7 @@ script:
 
   - >
     tail ${idempotence}
-    | grep -q 'changed=0.*failed=0'
+    | grep -q 'unreachable=0.*failed=0'
     && (echo 'Idempotence test: ok' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
 

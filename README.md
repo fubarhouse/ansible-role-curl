@@ -1,6 +1,7 @@
 # Ansible Role: Curl
 
 [![Build Status](https://travis-ci.org/fubarhouse/ansible-role-curl.svg?branch=master)](https://travis-ci.org/fubarhouse/ansible-role-curl)
+[![Ansible Galaxy](https://img.shields.io/badge/galaxy-fubarhouse--curl-13298.svg)](https://galaxy.ansible.com/fubarhouse/curl)
 
 * Designed for systems lacking Curl, or systems wanting a specific version of curl.
 * Builds and Installs specified Curl from [released source](https://curl.haxx.se/download/).
@@ -10,6 +11,18 @@
   None.
 
 ## Role Variables
+
+Additional installation flags are optional, to run these flags on `configure`, specify the flags as follows:
+````
+curl_configure_flags:
+  - disable-shared
+  - with-ssl
+````
+
+The above configuration will validate to the following:
+````
+./configure --disable-shared --with-ssl
+````
 
 Select location to install temporary, or accept the default below:
 ````
