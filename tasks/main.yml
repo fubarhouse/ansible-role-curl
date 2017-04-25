@@ -113,9 +113,9 @@
   assert:
     that: '"{{ curl_version }}" in "{{ curl_version_after.stdout }}"'
   when:
-    - 'curl_version != "master"
+    - curl_version != "master"
     - curl_version_after is defined
-    - and "curl {{ curl_version }}" not in "{{ curl_version_after.stdout_lines }}"'
+    - '"curl {{ curl_version }}" not in "{{ curl_version_after.stdout_lines }}"'
 
 - name: "CURL | Verify current version"
   assert:
