@@ -16,7 +16,6 @@
     - shell: dnf clean all --enablerepo=\*
       changed_when: false
       failed_when: false
-  tasks:
     - name: Install dependencies.
       package:
         name:: "{{ item }}"
