@@ -22,7 +22,6 @@
         state: installed
       with_items:
         - curl
-        - libcurl4-openssl-dev
         - git
         - git-svn
         - rsync
@@ -43,7 +42,7 @@
         - openssl-devel
         - subversion-perl
         - make
-        - libcurl4-gnutls-dev
+        - libcurl4-openssl-dev
         - libexpat1-dev
         - gettext
         - libssl-dev
