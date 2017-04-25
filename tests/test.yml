@@ -14,6 +14,7 @@
       changed_when: false
       failed_when: false
     - shell: dnf clean all --enablerepo=\*
+      changed_when: false
       failed_when: false
   roles:
     - geerlingguy.git
