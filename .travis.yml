@@ -41,6 +41,7 @@ script:
 
   # Ansible syntax check.
   - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml --syntax-check'
+  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/test-idempotence.yml --syntax-check'
 
   # Test role.
   - 'docker exec "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml'
@@ -50,7 +51,7 @@ script:
   - idempotence=$(mktemp)
   - >
     docker exec "$(cat ${container_id})"
-    ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml --sudo -vvvv
+    ansible-playbook /etc/ansible/roles/role_under_test/tests/test-idempotence.yml --sudo -vvvv
     | tee -a ${idempotence}
   - >
     tail ${idempotence}

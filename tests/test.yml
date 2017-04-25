@@ -23,6 +23,7 @@
       with_items:
         - curl
         - git
+        - gcc
         - git-svn
         - rsync
         - openssh-server
@@ -42,6 +43,7 @@
         - openssl-devel
         - subversion-perl
         - make
+        - libcurl4-gnutls-dev
         - libcurl4-openssl-dev
         - libexpat1-dev
         - gettext
@@ -49,6 +51,7 @@
         - build-essential
         - zip
         - sudo
+      changed_when: false
       failed_when: false
   roles:
     - geerlingguy.git

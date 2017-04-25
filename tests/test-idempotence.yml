@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+  remote_user: root
+  vars:
+    pre_tasks:
+    - name: Update apt cache.
+      apt:
+        update_cache: yes
+        cache_valid_time: 600
+      when: ansible_os_family == 'Debian'
+      changed_when: false
+      failed_when: false
+    - shell: dnf clean all --enablerepo=\*
+      changed_when: false
+      failed_when: false
+  roles:
+    - role_under_test
+
+
