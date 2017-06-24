@@ -117,14 +117,14 @@
 
 - name: "CURL | Verify current version"
   assert:
-    that: '"{{ curl_version }}" in "{{ curl_version_after.stdout }}"'
+    that: 'curl_version in "{{ curl_version_after.stdout }}"'
   when:
     - curl_version != "master"
     - curl_version_after is defined
 
 - name: "CURL | Verify current version"
   assert:
-    that: '"-DEV" in "{{ curl_version_after.stdout }}"'
+    that: '-DEV in "{{ curl_version_after.stdout }}"'
   when:
     - curl_version == "master"
     - curl_version_after is defined
