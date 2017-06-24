@@ -78,7 +78,7 @@
     chdir: "{{ curl_path }}/curl/curl-{{ curl_version }}"
   when:
   - 'curl_configure_flags is defined'
-  - 'curl_configure_flags.0 is undefined'
+  - 'curl_configure_flags|length > 0'
   - '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
 
 - name: "CURL | Configure with flags"
@@ -87,7 +87,7 @@
     chdir: "{{ curl_path }}/curl/curl-{{ curl_version }}"
   when:
   - 'curl_configure_flags is defined'
-  - 'curl_configure_flags.0 is defined'
+  - 'curl_configure_flags|length > 0'
   - '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
 
 # @TODO Use make module
