@@ -10,6 +10,7 @@
     - make
     - tar
   when: '"{{ ansible_os_family }}" == "Debian"'
+  failed_when: false
 
 - name: "CURL | Ensure RedHat dependencies are installed"
   package:
@@ -20,3 +21,4 @@
     - make
     - tar
   when: '"{{ ansible_os_family }}" == "RedHat"'
+  failed_when: false
