@@ -51,7 +51,7 @@
 
 - name: "CURL | Download from source"
   get_url:
-    url: "https://curl.haxx.se/download/curl-{{ curl_version }}.{{ curl_extension }}"
+    url: "http://curl.haxx.se/download/curl-{{ curl_version }}.{{ curl_extension }}"
     dest: "{{ curl_path }}/curl/{{ curl_version }}.{{ curl_extension }}"
     remote_src: yes
     validate_certs: False
