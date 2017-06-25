@@ -1,0 +1,59 @@
+---
+- hosts: localhost
+  remote_user: root
+  vars:
+    git_install_from_source: true
+    git_install_from_source_force_update: true
+    git_version: 2.9.3
+  pre_tasks:
+    - name: Update apt cache.
+      apt:
+        update_cache: yes
+        cache_valid_time: 600
+      when: ansible_os_family == 'Debian'
+      changed_when: false
+      failed_when: false
+    - shell: dnf clean all --enablerepo=\*
+      changed_when: false
+      failed_when: false
+    - name: Install dependencies.
+      package:
+        name:: "{{ item }}"
+        state: installed
+      with_items:
+        - curl
+        - git
+        - gcc
+        - git-svn
+        - rsync
+        - openssh-server
+        - openssh-client
+        - python
+        - python-dev
+        - unzip
+        - tar
+        - gtar
+        - gzip
+        - wget
+        - gettext-devel
+        - expat-devel
+        - curl-devel
+        - zlib-devel
+        - perl-devel
+        - openssl-devel
+        - subversion-perl
+        - make
+        - libcurl4-gnutls-dev
+        - libcurl4-openssl-dev
+        - libexpat1-dev
+        - gettext
+        - libssl-dev
+        - build-essential
+        - zip
+        - sudo
+      changed_when: false
+      failed_when: false
+  roles:
+    - role_under_test
+
+

@@ -14,19 +14,19 @@ env:
     distro: ubuntu1210
     init: /sbin/init
     run_opts: --privileged
-    playbook: test.yml
+    playbook: test-nogit.yml
     playbook_idempotence: test-idempotence.yml
   - docker_user: fubarhouse
     distro: ubuntu1304
     init: /sbin/init
     run_opts: --privileged
-    playbook: test.yml
+    playbook: test-nogit.yml
     playbook_idempotence: test-idempotence.yml
   - docker_user: fubarhouse
     distro: ubuntu1310
     init: /sbin/init
     run_opts: --privileged
-    playbook: test.yml
+    playbook: test-nogit.yml
     playbook_idempotence: test-idempotence.yml
   - docker_user: geerlingguy
     distro: ubuntu1404
