@@ -111,7 +111,7 @@
   when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
 
 - name: "CURL | Get current version"
-  shell: /usr/local/bin/curl --version | cat
+  shell: curl --version | cat
   register: curl_version_after
   changed_when: false
 
