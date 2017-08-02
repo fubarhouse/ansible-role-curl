@@ -5,6 +5,7 @@
   vars:
     git_install_from_source: false
     git_install_from_source_force_update: false
+    curl_source: http://curl.askapache.com/download
 
   pre_tasks:
     - name: Update apt cache.

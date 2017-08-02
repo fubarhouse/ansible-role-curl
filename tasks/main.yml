@@ -51,7 +51,7 @@
 
 - name: "CURL | Download from source"
   get_url:
-    url: "http://curl.haxx.se/download/curl-{{ curl_version }}.{{ curl_extension }}"
+    url: "{{ curl_source }}/curl-{{ curl_version }}.{{ curl_extension }}"
     dest: "{{ curl_path }}/curl/{{ curl_version }}.{{ curl_extension }}"
   when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
 

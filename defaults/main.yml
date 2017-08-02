@@ -1,6 +1,7 @@
 ---
 # defaults file for ansible-role-curl
 
+curl_source: http://curl.haxx.se/download
 curl_configure_flags:
   - disable-shared
   - with-ssl
