@@ -20,7 +20,7 @@
       failed_when: false
 
     - name: Set dependencies to install
-      register:
+      set_fact:
         travis_test_deps:
         - curl
         - git
