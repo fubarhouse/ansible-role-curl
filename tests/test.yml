@@ -18,11 +18,10 @@
     - shell: dnf clean all --enablerepo=\*
       changed_when: false
       failed_when: false
-    - name: Install dependencies.
-      package:
-        name:: "{{ item }}"
-        state: installed
-      with_items:
+
+    - name: Set dependencies to install
+      register:
+        travis_test_deps:
         - curl
         - git
         - gcc
@@ -53,6 +52,24 @@
         - build-essential
         - zip
         - sudo
+
+    - name: Install dependencies (Debian).
+      apt:
+        name:: "{{ item }}"
+        state: installed
+      with_items:
+        - "{{ travis_test_deps }}"
+      when: ansible_os_family == "Debian"
+      changed_when: false
+      failed_when: false
+
+    - name: Install dependencies (RedHat).
+      yum:
+        name:: "{{ item }}"
+        state: installed
+      with_items:
+        - "{{ travis_test_deps }}"
+      when: ansible_os_family == "RedHat"
       changed_when: false
       failed_when: false
 
