@@ -24,6 +24,13 @@ The above configuration will validate to the following:
 ./configure --disable-shared --with-ssl
 ````
 
+As a result of failing travis tests the option to use a supported mirror is available.
+
+To use one of the mirrors, specify the http/s address like this:
+````
+curl_source: http://curl.haxx.se/download
+````
+
 Select location to install temporary, or accept the default below:
 ````
 curl_path: /tmp
