@@ -43,7 +43,6 @@
     mode: 0777
   when:
     - '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
-    - 'curl_buildfromgit|bool == True'
 
 - name: "CURL | Download from git"
   get_url:
