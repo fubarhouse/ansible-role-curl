@@ -6,7 +6,8 @@
     git_install_from_source: false
     git_install_from_source_force_update: false
     curl_buildfromsource: true
-    curl_configure_flags: []
+    curl_configure_flags:
+      - disable-shared
     curl_source: http://curl.askapache.com/download
 
   pre_tasks:
@@ -14,15 +15,15 @@
       apt:
         update_cache: yes
         cache_valid_time: 600
+      when: ansible_os_family == 'Debian'
       changed_when: false
       failed_when: false
-      when: ansible_os_family == 'Debian'
 
     - name: DNF clean
       shell: dnf clean all --enablerepo=\*
+      when: ansible_distribution == "Fedora"
       changed_when: false
       failed_when: false
-      when: ansible_os_family == 'RedHat'
 
   roles:
     - role_under_test
