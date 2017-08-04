@@ -3,18 +3,6 @@
 curl_source_dependencies:
   - gcc
   - rsync
-  - openssh-server
-  - openssh-client
   - unzip
-  - tar
-  - zlib-devel
-  - perl-devel
-  - openssl-devel
-  - subversion-perl
   - make
-  - libexpat1-dev
-  - gettext
-  - libssl-dev
-  - build-essential
-  - zip
   - sudo
