@@ -2,7 +2,7 @@
 
 curl_source_dependencies:
   - gcc
-  - rsync
-  - unzip
   - make
+  - rsync
   - sudo
+  - unzip
