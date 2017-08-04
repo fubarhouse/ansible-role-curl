@@ -1,5 +1,12 @@
 ---
 
+- name: "CURL | Include OS-specific variables (CentOS)"
+  include_vars: "{{ ansible_distribution }}.yml"
+  when:
+  - ansible_os_family == "RedHat"
+  - ansible_distribution != "Fedora"
+  - ansible_distribution == "CentOS"
+
 - name: "CURL | Include OS-specific variables (Debian)"
   include_vars: "{{ ansible_os_family }}.yml"
   when: ansible_os_family == "Debian"
@@ -29,6 +36,7 @@
   when:
   - ansible_os_family == "RedHat"
   - ansible_distribution != "Fedora"
+  - ansible_distribution != "CentOS"
 
 - name: "CURL | Install dependencies (RedHat)"
   yum:
