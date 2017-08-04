@@ -7,7 +7,6 @@ curl_source_dependencies:
   - openssh-client
   - unzip
   - tar
-  - expat-devel
   - zlib-devel
   - perl-devel
   - openssl-devel
