@@ -7,7 +7,7 @@
 
 - name: "CURL | Install dependencies (Debian)"
   apt:
-    name:: "{{ item }}"
+    name: "{{ item }}"
     state: installed
   with_items:
     - "{{ curl_source_dependencies }}"
@@ -25,7 +25,7 @@
 
 - name: "CURL | Install dependencies (RedHat)"
   yum:
-    name:: "{{ item }}"
+    name: "{{ item }}"
     state: installed
   with_items:
     - "{{ curl_source_dependencies }}"
