@@ -1,0 +1,27 @@
+---
+
+curl_source_dependencies:
+  - gcc
+  - rsync
+  - openssh-server
+  - openssh-client
+  - python
+  - python-dev
+  - unzip
+  - tar
+  - gtar
+  - gzip
+  - wget
+  - gettext-devel
+  - expat-devel
+  - zlib-devel
+  - perl-devel
+  - openssl-devel
+  - subversion-perl
+  - make
+  - libexpat1-dev
+  - gettext
+  - libssl-dev
+  - build-essential
+  - zip
+  - sudo

@@ -1,45 +1,45 @@
 ---
 # tasks file for ansible-role-curl
 
-- name: "CURL | Include Dependency tasks"
-  include: "dependencies.yml"
+- name: "CURL | Include OS-specific variables (Debian)"
+  include_vars: "{{ ansible_os_family }}.yml"
+  when:
+  - ansible_os_family == "RedHat"
 
-- name: "CURL | Set to Source release by default"
-  set_fact:
-    curl_buildfromgit: False
-  when: curl_buildfromgit is undefined
+- name: "CURL | Install dependencies (Debian)"
+  apt:
+    name:: "{{ item }}"
+    state: installed
+  with_items:
+    - "{{ curl_source_dependencies }}"
+  when: ansible_os_family == "Debian"
 
-- name: "CURL | Set version to default"
-  set_fact:
-    curl_version: "7.54.1"
-  when: curl_version is undefined
+- name: "CURL | Include OS-specific variables (RedHat)"
+  include_vars: "{{ ansible_os_family }}.yml"
+  when:
+  - ansible_os_family == "RedHat"
 
-- name: "CURL | Set version to master"
-  set_fact:
-    curl_version: "master"
-  when: curl_buildfromgit
-
-- name: "CURL | Set path to default"
-  set_fact:
-    curl_path: "/tmp"
-  when: curl_path is undefined
-
-- name: "CURL | Set archive type to default"
-  set_fact:
-    curl_extension: "tar.gz"
-  when: curl_extension is undefined
+- name: "CURL | Install dependencies (RedHat)"
+  yum:
+    name:: "{{ item }}"
+    state: installed
+  with_items:
+    - "{{ curl_source_dependencies }}"
+  when: ansible_os_family == "RedHat"
 
 - name: "CURL | Get current version"
   shell: curl --version | cat
   register: curl_version_before
   changed_when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
 
-- name: "CURL | create directory"
+- name: "CURL | Create directory"
   file:
     path: "{{ curl_path }}/curl/curl-{{ curl_version }}"
     state: directory
     mode: 0777
-  when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
+  when:
+    - '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
+    - 'curl_buildfromgit|bool == True'
 
 - name: "CURL | Download from git"
   get_url:

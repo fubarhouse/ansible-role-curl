@@ -12,69 +12,17 @@
       apt:
         update_cache: yes
         cache_valid_time: 600
+      changed_when: false
+      failed_when: false
       when: ansible_os_family == 'Debian'
-      changed_when: false
-      failed_when: false
-    - shell: dnf clean all --enablerepo=\*
-      changed_when: false
-      failed_when: false
 
-    - name: Set dependencies to install
-      set_fact:
-        travis_test_deps:
-        - curl
-        - git
-        - gcc
-        - git-svn
-        - rsync
-        - openssh-server
-        - openssh-client
-        - python
-        - python-dev
-        - unzip
-        - tar
-        - gtar
-        - gzip
-        - wget
-        - gettext-devel
-        - expat-devel
-        - curl-devel
-        - zlib-devel
-        - perl-devel
-        - openssl-devel
-        - subversion-perl
-        - make
-        - libcurl4-gnutls-dev
-        - libcurl4-openssl-dev
-        - libexpat1-dev
-        - gettext
-        - libssl-dev
-        - build-essential
-        - zip
-        - sudo
-
-    - name: Install dependencies (Debian).
-      apt:
-        name:: "{{ item }}"
-        state: installed
-      with_items:
-        - "{{ travis_test_deps }}"
-      when: ansible_os_family == "Debian"
+    - name: DNF clean
+      shell: dnf clean all --enablerepo=\*
       changed_when: false
       failed_when: false
-
-    - name: Install dependencies (RedHat).
-      yum:
-        name:: "{{ item }}"
-        state: installed
-      with_items:
-        - "{{ travis_test_deps }}"
-      when: ansible_os_family == "RedHat"
-      changed_when: false
-      failed_when: false
+      when: ansible_os_family == 'RedHat'
 
   roles:
-    - geerlingguy.git
     - role_under_test
 
 
