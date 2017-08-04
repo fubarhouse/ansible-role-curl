@@ -1,7 +1,8 @@
 ---
 # defaults file for ansible-role-curl
 
-curl_buildfromgit: False
+curl_buildfromsource: false
+curl_buildfromgit: false
 curl_version: "7.54.1"
 curl_path: "/tmp"
 curl_extension: "tar.gz"

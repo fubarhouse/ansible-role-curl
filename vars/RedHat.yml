@@ -3,6 +3,5 @@
 curl_source_dependencies:
   - gcc
   - make
-  - rsync
   - sudo
   - unzip

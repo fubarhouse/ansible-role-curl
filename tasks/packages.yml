@@ -1,0 +1,17 @@
+---
+
+- name: "CURL | Install dependencies (Debian)"
+  apt:
+    name: "{{ item }}"
+    state: installed
+  with_items:
+    - curl
+  when: ansible_os_family == "Debian"
+
+- name: "CURL | Install dependencies (RedHat)"
+  yum:
+    name: "{{ item }}"
+    state: installed
+  with_items:
+    - curl
+  when: ansible_os_family == "RedHat"
