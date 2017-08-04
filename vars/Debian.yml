@@ -9,9 +9,6 @@ curl_source_dependencies:
   - python-dev
   - unzip
   - tar
-  - gtar
-  - gzip
-  - wget
   - gettext-devel
   - expat-devel
   - zlib-devel
