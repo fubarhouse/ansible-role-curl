@@ -13,7 +13,7 @@
     name: "{{ item }}"
     state: installed
   with_items:
-    - "{{ curl_source_dependencies }}"
+    - curl
   when: ansible_distribution == "Fedora"
 
 - name: "CURL | Install dependencies (RedHat)"
