@@ -2,8 +2,8 @@
 
 - name: "CURL | Include tasks to install from source"
   include: "source.yml"
-  when: '"{{ curl_buildfromsource|bool }}" == true'
+  when: curl_buildfromsource|bool == true
 
 - name: "CURL | Include tasks to install from packaged sources"
   include: "packages.yml"
-  when: '"{{ curl_buildfromsource|bool }}" == false'
+  when: curl_buildfromsource|bool == false
