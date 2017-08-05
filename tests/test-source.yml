@@ -6,6 +6,7 @@
     git_install_from_source: false
     git_install_from_source_force_update: false
     curl_buildfromsource: true
+    curl_version: "7.54.0"
     curl_configure_flags:
       - disable-shared
     curl_source: http://curl.askapache.com/download
