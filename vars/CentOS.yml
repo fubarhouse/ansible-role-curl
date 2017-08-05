@@ -1,9 +1,9 @@
 ---
 
 curl_source_dependencies:
+  - glibc
   - epel-release
   - gcc
   - make
-  - man-db
   - sudo
   - unzip
