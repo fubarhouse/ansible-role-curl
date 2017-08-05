@@ -1,0 +1,8 @@
+---
+
+curl_source_dependencies:
+  - epel-release
+  - gcc
+  - make
+  - sudo
+  - unzip
