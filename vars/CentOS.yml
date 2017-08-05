@@ -4,5 +4,6 @@ curl_source_dependencies:
   - epel-release
   - gcc
   - make
+  - man-db
   - sudo
   - unzip
