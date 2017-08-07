@@ -17,14 +17,10 @@
         update_cache: yes
         cache_valid_time: 600
       when: ansible_os_family == 'Debian'
-      changed_when: false
-      failed_when: false
 
     - name: DNF clean
       shell: dnf clean all --enablerepo=\*
       when: ansible_distribution == "Fedora"
-      changed_when: false
-      failed_when: false
 
   roles:
     - role_under_test
