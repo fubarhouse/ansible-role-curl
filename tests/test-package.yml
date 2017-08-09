@@ -4,9 +4,13 @@
 
   vars:
     curl_buildfromsource: false
+    curl_version: "7.54.0"
+    curl_configure_flags:
+      - disable-shared
     curl_source: http://curl.askapache.com/download
 
   pre_tasks:
+
     - name: Update apt cache.
       apt:
         update_cache: yes
@@ -15,7 +19,9 @@
 
     - name: DNF clean
       shell: dnf clean all --enablerepo=\*
-      when: ansible_distribution != "CentOS"
+      when:
+        - ansible_os_family == 'RedHat'
+        - ansible_distribution != "CentOS"
       changed_when: false
 
   roles:
