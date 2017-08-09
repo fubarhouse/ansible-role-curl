@@ -103,10 +103,8 @@
   - 'curl_configure_flags|length > 0'
   - '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
 
-# @TODO Use make module
 - name: "CURL | Make"
-  shell: "make"
-  args:
+  make:
     chdir: "{{ curl_path }}/curl/curl-{{ curl_version }}"
   when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
 
@@ -115,13 +113,6 @@
 #  become: yes
 #  become_user: root
 #  make test (optional)
-
-# @TODO Use make module
-- name: "CURL | Install"
-  shell: "make install"
-  args:
-    chdir: "{{ curl_path }}/curl/curl-{{ curl_version }}"
-  when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
 
 - name: "CURL | Get current version"
   shell: curl --version | cat
