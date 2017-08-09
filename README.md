@@ -5,12 +5,23 @@
 
 * Designed for systems lacking Curl, or systems wanting a specific version of curl.
 * Builds and Installs specified Curl from [released source](https://curl.haxx.se/download/).
+* Supports 20 different varieties of linux via Travis automated tests.
 
 ## Requirements
 
   None.
 
 ## Role Variables
+
+All of the variables associated to this role are controlled by source-builds only.
+
+To enable a source-build, ensure the following is set to true, it is set to false ***by default***.
+
+Default installations with this role will accommodate the system's package manager of the supported system - apt-get, yum or dnf.
+
+````
+curl_buildfromsource: true
+````
 
 Additional installation flags are optional, to run these flags on `configure`, specify the flags as follows:
 ````
@@ -42,13 +53,8 @@ curl_version: "7.51.0"
 ````
 
 Select which archive type to download/extract, or accept the default below:
-`````
-curl_extension: "tar.gz"
-`````
-
-If you want to build from git source code, ensure the following boolean is true:
 ````
-curl_buildfromgit: True
+curl_extension: "tar.gz"
 ````
 
 ## Dependencies

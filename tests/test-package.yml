@@ -3,8 +3,6 @@
   remote_user: root
 
   vars:
-    git_install_from_source: false
-    git_install_from_source_force_update: false
     curl_buildfromsource: false
     curl_source: http://curl.askapache.com/download
 
@@ -13,15 +11,12 @@
       apt:
         update_cache: yes
         cache_valid_time: 600
-      changed_when: false
-      failed_when: false
       when: ansible_os_family == 'Debian'
 
     - name: DNF clean
       shell: dnf clean all --enablerepo=\*
-      changed_when: false
-      failed_when: false
       when: ansible_os_family == 'RedHat'
+      changed_when: false
 
   roles:
     - role_under_test
