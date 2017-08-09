@@ -108,6 +108,12 @@
     chdir: "{{ curl_path }}/curl/curl-{{ curl_version }}"
   when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
 
+- name: "CURL | Install"
+  make:
+    target: install
+    chdir: "{{ curl_path }}/curl/curl-{{ curl_version }}"
+  when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
+
 # @TODO Use make module, make it optional via variable, and implement.
 #- name: "CURL | Make (Test)"
 #  become: yes
