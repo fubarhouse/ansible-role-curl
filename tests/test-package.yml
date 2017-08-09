@@ -15,7 +15,7 @@
 
     - name: DNF clean
       shell: dnf clean all --enablerepo=\*
-      when: ansible_os_family == 'RedHat'
+      when: ansible_distribution != "CentOS"
       changed_when: false
 
   roles:

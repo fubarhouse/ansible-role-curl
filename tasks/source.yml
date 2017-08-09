@@ -2,14 +2,23 @@
 
 - name: "CURL | Include OS-specific variables (CentOS)"
   include_vars: "{{ ansible_distribution }}.yml"
-  when:
-  - ansible_os_family == "RedHat"
-  - ansible_distribution != "Fedora"
-  - ansible_distribution == "CentOS"
+  when: ansible_distribution == "CentOS"
 
 - name: "CURL | Include OS-specific variables (Debian)"
   include_vars: "{{ ansible_os_family }}.yml"
   when: ansible_os_family == "Debian"
+
+- name: "CURL | Include OS-specific variables (RedHat)"
+  include_vars: "{{ ansible_distribution }}.yml"
+  when: ansible_os_family == "RedHat"
+
+- name: "CURL | Install dependencies (CentOS)"
+  yum:
+    name: "{{ item }}"
+    state: installed
+  with_items:
+    - "{{ curl_source_dependencies }}"
+  when: ansible_distribution == "RedHat"
 
 - name: "CURL | Install dependencies (Debian)"
   apt:
@@ -19,34 +28,13 @@
     - "{{ curl_source_dependencies }}"
   when: ansible_os_family == "Debian"
 
-- name: "CURL | Include OS-specific variables (Fedora)"
-  include_vars: "{{ ansible_distribution }}.yml"
-  when: ansible_distribution == "Fedora"
-
-- name: "CURL | Install dependencies (Fedora)"
+- name: "CURL | Install dependencies (RedHat)"
   dnf:
     name: "{{ item }}"
     state: installed
   with_items:
     - "{{ curl_source_dependencies }}"
-  when: ansible_distribution == "Fedora"
-
-- name: "CURL | Include OS-specific variables (RedHat)"
-  include_vars: "{{ ansible_os_family }}.yml"
-  when:
-  - ansible_os_family == "RedHat"
-  - ansible_distribution != "Fedora"
-  - ansible_distribution != "CentOS"
-
-- name: "CURL | Install dependencies (RedHat)"
-  yum:
-    name: "{{ item }}"
-    state: installed
-  with_items:
-    - "{{ curl_source_dependencies }}"
-  when:
-    - ansible_os_family == "RedHat"
-    - ansible_distribution != "Fedora"
+  when: ansible_distribution == "RedHat"
 
 - name: "CURL | Get current version"
   shell: curl --version | cat
