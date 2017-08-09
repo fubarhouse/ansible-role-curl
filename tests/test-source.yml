@@ -21,6 +21,7 @@
     - name: DNF clean
       shell: dnf clean all --enablerepo=\*
       when: ansible_distribution == "Fedora"
+      changed_when: false
 
   roles:
     - role_under_test
