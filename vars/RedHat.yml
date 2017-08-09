@@ -1,7 +1,0 @@
----
-
-curl_source_dependencies:
-  - gcc
-  - make
-  - sudo
-  - unzip
