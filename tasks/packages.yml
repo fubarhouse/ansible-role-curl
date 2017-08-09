@@ -19,7 +19,7 @@
   when: ansible_os_family == "Debian"
 
 - name: "CURL | Install (RedHat)"
-  yum:
+  dnf:
     name: "{{ item }}"
     state: installed
   with_items:
