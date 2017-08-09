@@ -114,12 +114,6 @@
     chdir: "{{ curl_path }}/curl/curl-{{ curl_version }}"
   when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
 
-# @TODO Use make module, make it optional via variable, and implement.
-#- name: "CURL | Make (Test)"
-#  become: yes
-#  become_user: root
-#  make test (optional)
-
 - name: "CURL | Get current version"
   shell: curl --version | cat
   register: curl_version_after
