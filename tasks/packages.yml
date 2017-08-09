@@ -1,22 +1,6 @@
 ---
 
-- name: "CURL | Install dependencies (Debian)"
-  apt:
-    name: "{{ item }}"
-    state: installed
-  with_items:
-    - curl
-  when: ansible_os_family == "Debian"
-
-- name: "CURL | Install dependencies (Fedora)"
-  dnf:
-    name: "{{ item }}"
-    state: installed
-  with_items:
-    - curl
-  when: ansible_distribution == "Fedora"
-
-- name: "CURL | Install dependencies (RedHat)"
+- name: "CURL | Install (CentOS)"
   yum:
     name: "{{ item }}"
     state: installed
@@ -24,4 +8,22 @@
     - curl
   when:
     - ansible_os_family == "RedHat"
-    - ansible_distribution != "Fedora"
+    - ansible_distribution == "CentOS"
+
+- name: "CURL | Install (Debian)"
+  apt:
+    name: "{{ item }}"
+    state: installed
+  with_items:
+    - curl
+  when: ansible_os_family == "Debian"
+
+- name: "CURL | Install (RedHat)"
+  yum:
+    name: "{{ item }}"
+    state: installed
+  with_items:
+    - curl
+  when:
+    - ansible_os_family == "RedHat"
+    - ansible_distribution != "CentOS"
