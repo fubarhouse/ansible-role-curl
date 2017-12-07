@@ -1,7 +1,9 @@
 # Ansible Role: Curl
 
 [![Build Status](https://travis-ci.org/fubarhouse/ansible-role-curl.svg?branch=master)](https://travis-ci.org/fubarhouse/ansible-role-curl)
-[![Ansible Galaxy](https://img.shields.io/badge/galaxy-fubarhouse--curl-13298.svg)](https://galaxy.ansible.com/fubarhouse/curl)
+[![Ansible Galaxy](https://img.shields.io/ansible/role/13298.svg)](https://galaxy.ansible.com/fubarhouse/curl)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/fubarhouse/ansible-role-curl/master/LICENSE)
+
 
 * Designed for systems lacking Curl, or systems wanting a specific version of curl.
 * Builds and Installs specified Curl from [released source](https://curl.haxx.se/download/).
