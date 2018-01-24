@@ -64,6 +64,11 @@ env:
     init: /sbin/init
     run_opts: --privileged
     playbook: test-package.yml
+  - docker_user: fubarhouse
+    distro: ubuntu1804
+    init: /sbin/init
+    run_opts: --privileged
+    playbook: test-package.yml
   - docker_user: geerlingguy
     distro: centos6
     init: /sbin/init
@@ -162,6 +167,11 @@ env:
     playbook: test-source.yml
   - docker_user: fubarhouse
     distro: ubuntu1710
+    init: /sbin/init
+    run_opts: --privileged
+    playbook: test-source.yml
+  - docker_user: fubarhouse
+    distro: ubuntu1804
     init: /sbin/init
     run_opts: --privileged
     playbook: test-source.yml
