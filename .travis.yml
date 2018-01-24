@@ -114,6 +114,11 @@ env:
     init: /usr/lib/systemd/systemd
     run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
     playbook: test-package.yml
+  - docker_user: fubarhouse
+    distro: fedora27
+    init: /usr/lib/systemd/systemd
+    run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
+    playbook: test-package.yml
     # Tests for source builds.
   - docker_user: geerlingguy
     distro: ubuntu1204
@@ -222,6 +227,11 @@ env:
     playbook: test-source.yml
   - docker_user: fubarhouse
     distro: fedora26
+    init: /usr/lib/systemd/systemd
+    run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
+    playbook: test-source.yml
+  - docker_user: fubarhouse
+    distro: fedora27
     init: /usr/lib/systemd/systemd
     run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
     playbook: test-source.yml
