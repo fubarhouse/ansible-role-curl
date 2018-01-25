@@ -4,7 +4,7 @@ services: docker
 
 env:
   # Distribution installation tests.
-  - docker_user: geerlingguy
+  - docker_user: fubarhouse
     distro: ubuntu1204
     init: /sbin/init
     run_opts: --privileged
@@ -120,7 +120,7 @@ env:
     run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
     playbook: test-package.yml
     # Tests for source builds.
-  - docker_user: geerlingguy
+  - docker_user: fubarhouse
     distro: ubuntu1204
     init: /sbin/init
     run_opts: --privileged
