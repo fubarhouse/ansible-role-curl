@@ -7,99 +7,192 @@ services: docker
 
 env:
 
-  # Source installation tests.
+  # Package installation tests.
   - distro: precise
     init: /sbin/init
     run_opts: --privileged
-    playbook: playbook.yml
+    playbook: test-package.yml
   - distro: quantal
     init: /sbin/init
     run_opts: --privileged
-    playbook: playbook.yml
+    playbook: test-package.yml
   - distro: raring
     init: /sbin/init
     run_opts: --privileged
-    playbook: playbook.yml
+    playbook: test-package.yml
   - distro: saucy
     init: /sbin/init
     run_opts: --privileged
-    playbook: playbook.yml
+    playbook: test-package.yml
   - distro: trusty
     init: /sbin/init
     run_opts: --privileged
-    playbook: playbook.yml
+    playbook: test-package.yml
   - distro: utopic
     init: /sbin/init
     run_opts: --privileged
-    playbook: playbook.yml
+    playbook: test-package.yml
   - distro: vivid
     init: /sbin/init
     run_opts: --privileged
-    playbook: playbook.yml
+    playbook: test-package.yml
   - distro: wily
     init: /sbin/init
     run_opts: --privileged
-    playbook: playbook.yml
+    playbook: test-package.yml
   - distro: xenial
     init: /sbin/init
     run_opts: --privileged
-    playbook: playbook.yml
+    playbook: test-package.yml
   - distro: yakkety
     init: /sbin/init
     run_opts: --privileged
-    playbook: playbook.yml
+    playbook: test-package.yml
   - distro: zesty
     init: /sbin/init
     run_opts: --privileged
-    playbook: playbook.yml
+    playbook: test-package.yml
   - distro: artful
     init: /sbin/init
     run_opts: --privileged
-    playbook: playbook.yml
+    playbook: test-package.yml
   - distro: bionic
     init: /sbin/init
     run_opts: --privileged
-    playbook: playbook.yml
+    playbook: test-package.yml
   - distro: centos-6
     init: /sbin/init
     run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
-    playbook: playbook.yml
+    playbook: test-package.yml
   - distro: centos-7
     init: /usr/lib/systemd/systemd
     run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
-    playbook: playbook.yml
+    playbook: test-package.yml
   - distro: wheezy
     init: /bin/systemd
     run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
-    playbook: playbook.yml
+    playbook: test-package.yml
   - distro: jessie
     init: /lib/systemd/systemd
     run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
-    playbook: playbook.yml
+    playbook: test-package.yml
   - distro: stretch
     init: /bin/systemd
     run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
-    playbook: playbook.yml
+    playbook: test-package.yml
   - distro: buster
     init: /bin/systemd
     run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
-    playbook: playbook.yml
+    playbook: test-package.yml
   - distro: fedora-24
     init: /usr/lib/systemd/systemd
     run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
-    playbook: playbook.yml
+    playbook: test-package.yml
   - distro: fedora-25
     init: /usr/lib/systemd/systemd
     run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
-    playbook: playbook.yml
+    playbook: test-package.yml
   - distro: fedora-26
     init: /usr/lib/systemd/systemd
     run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
     playbook: playbook.yml
+  - distro: test-package-27
+    init: /usr/lib/systemd/systemd
+    run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
+    playbook: test-package.yml
+  # Source installation tests
+  - distro: precise
+    init: /sbin/init
+    run_opts: --privileged
+    playbook: test-source.yml
+  - distro: quantal
+    init: /sbin/init
+    run_opts: --privileged
+    playbook: test-source.yml
+  - distro: raring
+    init: /sbin/init
+    run_opts: --privileged
+    playbook: test-source.yml
+  - distro: saucy
+    init: /sbin/init
+    run_opts: --privileged
+    playbook: test-source.yml
+  - distro: trusty
+    init: /sbin/init
+    run_opts: --privileged
+    playbook: test-source.yml
+  - distro: utopic
+    init: /sbin/init
+    run_opts: --privileged
+    playbook: test-source.yml
+  - distro: vivid
+    init: /sbin/init
+    run_opts: --privileged
+    playbook: test-source.yml
+  - distro: wily
+    init: /sbin/init
+    run_opts: --privileged
+    playbook: test-source.yml
+  - distro: xenial
+    init: /sbin/init
+    run_opts: --privileged
+    playbook: test-source.yml
+  - distro: yakkety
+    init: /sbin/init
+    run_opts: --privileged
+    playbook: test-source.yml
+  - distro: zesty
+    init: /sbin/init
+    run_opts: --privileged
+    playbook: test-source.yml
+  - distro: artful
+    init: /sbin/init
+    run_opts: --privileged
+    playbook: test-source.yml
+  - distro: bionic
+    init: /sbin/init
+    run_opts: --privileged
+    playbook: test-source.yml
+  - distro: centos-6
+    init: /sbin/init
+    run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
+    playbook: test-source.yml
+  - distro: centos-7
+    init: /usr/lib/systemd/systemd
+    run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
+    playbook: test-source.yml
+  - distro: wheezy
+    init: /bin/systemd
+    run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
+    playbook: test-source.yml
+  - distro: jessie
+    init: /lib/systemd/systemd
+    run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
+    playbook: test-source.yml
+  - distro: stretch
+    init: /bin/systemd
+    run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
+    playbook: test-source.yml
+  - distro: buster
+    init: /bin/systemd
+    run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
+    playbook: test-source.yml
+  - distro: fedora-24
+    init: /usr/lib/systemd/systemd
+    run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
+    playbook: test-source.yml
+  - distro: fedora-25
+    init: /usr/lib/systemd/systemd
+    run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
+    playbook: test-source.yml
+  - distro: fedora-26
+    init: /usr/lib/systemd/systemd
+    run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
+    playbook: test-source.yml
   - distro: fedora-27
     init: /usr/lib/systemd/systemd
     run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
-    playbook: playbook.yml
+    playbook: test-source.yml
 
 before_install:
 
