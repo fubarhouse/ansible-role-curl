@@ -95,8 +95,8 @@ env:
   - distro: fedora-26
     init: /usr/lib/systemd/systemd
     run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
-    playbook: playbook.yml
-  - distro: test-package-27
+    playbook: test-package.yml
+  - distro: fedora-27
     init: /usr/lib/systemd/systemd
     run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
     playbook: test-package.yml
