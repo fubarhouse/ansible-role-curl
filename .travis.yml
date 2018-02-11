@@ -44,10 +44,10 @@ env:
     init: /sbin/init
     run_opts: --privileged
     playbook: test-package.yml
-  - distro: yakkety
-    init: /sbin/init
-    run_opts: --privileged
-    playbook: test-package.yml
+#  - distro: yakkety
+#    init: /sbin/init
+#    run_opts: --privileged
+#    playbook: test-package.yml
   - distro: zesty
     init: /sbin/init
     run_opts: --privileged
@@ -137,10 +137,10 @@ env:
     init: /sbin/init
     run_opts: --privileged
     playbook: test-source.yml
-  - distro: yakkety
-    init: /sbin/init
-    run_opts: --privileged
-    playbook: test-source.yml
+#  - distro: yakkety
+#    init: /sbin/init
+#    run_opts: --privileged
+#    playbook: test-source.yml
   - distro: zesty
     init: /sbin/init
     run_opts: --privileged
