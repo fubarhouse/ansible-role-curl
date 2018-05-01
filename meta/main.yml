@@ -2,37 +2,40 @@ galaxy_info:
   author: Karl Hepworth
   description: Installs Curl from desired released source code
   license: MIT
-  min_ansible_version: 2.0
+  min_ansible_version: 2.4
   platforms:
-  - name: Fedora
-    versions:
-      - 24
-      - 25
-      - 26
-  - name: Ubuntu
-    versions:
-      - artful
-      - zesty
-#      - yakkety
-      - xenial
-      - vivid
-      - wily
-      - utopic
-      - trusty
-      - saucy
-      - raring
-      - quantal
-      - precise
-  - name: EL
-    versions:
-      - 6
-      - 7
   - name: Debian
     versions:
-      - wheezy
-      - jessie
-      - stretch
-
+    - wheezy
+    - jessie
+    - stretch
+    - buster
+  - name: EL
+    versions:
+    - 6
+    - 7
+  - name: Fedora
+    versions:
+    - 24
+    - 25
+    - 26
+    - 27
+    - 28
+  - name: Ubuntu
+    versions:
+    - precise
+    - quantal
+    - raring
+    - saucy
+    - trusty
+    - utopic
+    - wily
+    - vivid
+    - xenial
+    - yakkety
+    - zesty
+    - artful
+    - bionic
   galaxy_tags:
     - curl
     - system
