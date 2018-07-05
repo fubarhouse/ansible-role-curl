@@ -60,6 +60,10 @@ env:
     init: /sbin/init
     run_opts: --privileged
     playbook: test-package.yml
+  - distro: cosmic
+    init: /sbin/init
+    run_opts: --privileged
+    playbook: test-package.yml
   - distro: centos-6
     init: /sbin/init
     run_opts: --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
@@ -154,6 +158,10 @@ env:
     run_opts: --privileged
     playbook: test-source.yml
   - distro: bionic
+    init: /sbin/init
+    run_opts: --privileged
+    playbook: test-source.yml
+  - distro: cosmic
     init: /sbin/init
     run_opts: --privileged
     playbook: test-source.yml
