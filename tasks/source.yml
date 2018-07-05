@@ -141,4 +141,4 @@
   file:
     path: "{{ curl_path }}/curl"
     state: absent
-  when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
+  when: 'curl_version_before.stdout.find(curl_compare) == -1'
