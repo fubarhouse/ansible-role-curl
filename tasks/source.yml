@@ -44,18 +44,22 @@
     - ansible_os_family == "RedHat"
     - ansible_distribution != "CentOS"
 
+- name: "CURL | Register string comparrison"
+  set_fact:
+    curl_compare: "curl {{ curl_version }}"
+  changed_when: false
+
 - name: "CURL | Get current version"
   shell: curl --version | cat
   register: curl_version_before
-  changed_when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
+  changed_when: 'curl_version_before.stdout.find(curl_compare) == -1'
 
 - name: "CURL | Create directory"
   file:
     path: "{{ curl_path }}/curl/curl-{{ curl_version }}"
     state: directory
     mode: 0777
-  when:
-    - '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
+  when: 'curl_version_before.stdout.find(curl_compare) == -1'
 
 - name: "CURL | Download from git"
   get_url:
@@ -69,7 +73,7 @@
   get_url:
     url: "{{ curl_source }}/curl-{{ curl_version }}.{{ curl_extension }}"
     dest: "{{ curl_path }}/curl/{{ curl_version }}.{{ curl_extension }}"
-  when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
+  when: 'curl_version_before.stdout.find(curl_compare) == -1'
 
 # Note: requires GNU-Tar &&|| unzip
 - name: "CURL | Unarchive"
@@ -77,7 +81,7 @@
     src: "{{ curl_path }}/curl/{{ curl_version }}.{{ curl_extension }}"
     dest: "{{ curl_path }}/curl/"
     creates: "{{ curl_path }}/curl/curl-{{ curl_version }}/README"
-  when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
+  when: 'curl_version_before.stdout.find(curl_compare) == -1'
 
 - name: "CURL | Build Configuration"
   shell: "./buildconf"
@@ -92,7 +96,7 @@
   when:
   - 'curl_configure_flags is defined'
   - 'curl_configure_flags|length == 0'
-  - '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
+  - 'curl_version_before.stdout.find(curl_compare) == -1'
 
 - name: "CURL | Configure with flags"
   shell: "./configure --{{ curl_configure_flags|join(' --') }}"
@@ -101,18 +105,18 @@
   when:
   - 'curl_configure_flags is defined'
   - 'curl_configure_flags|length > 0'
-  - '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
+  - 'curl_version_before.stdout.find(curl_compare) == -1'
 
 - name: "CURL | Make"
   make:
     chdir: "{{ curl_path }}/curl/curl-{{ curl_version }}"
-  when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
+  when: 'curl_version_before.stdout.find(curl_compare) == -1'
 
 - name: "CURL | Install"
   make:
     target: install
     chdir: "{{ curl_path }}/curl/curl-{{ curl_version }}"
-  when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
+  when: 'curl_version_before.stdout.find(curl_compare) == -1'
 
 - name: "CURL | Get current version"
   shell: curl --version | cat
@@ -124,7 +128,7 @@
     that: curl_version in curl_version_after.stdout
   when:
     - curl_version != "master"
-    - curl_version_after is defined
+    - 'curl_version_after is defined'
 
 - name: "CURL | Verify current version"
   assert:
@@ -137,4 +141,4 @@
   file:
     path: "{{ curl_path }}/curl"
     state: absent
-  when: '"curl {{ curl_version }}" not in "{{ curl_version_before.stdout_lines }}"'
+  when: 'curl_version_before.stdout.find(curl_compare) == -1'
