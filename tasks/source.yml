@@ -73,8 +73,9 @@
   get_url:
     url: "{{ curl_source }}/curl-{{ curl_version }}.{{ curl_extension }}"
     dest: "{{ curl_path }}/curl/{{ curl_version }}.{{ curl_extension }}"
-  register: curl_download_source
-  when: 'curl_version_before.stdout.find(curl_compare) == -1'
+  when: 
+    - 'curl_version_before.stdout.find(curl_compare) == -1'
+    - 'ansible_python_version is version( "2.7.9", ">=")'
 
 - name: "CURL | Insecurely download from source"
   get_url:
@@ -82,9 +83,8 @@
     dest: "{{ curl_path }}/curl/{{ curl_version }}.{{ curl_extension }}"
     validate_certs: false
   when:
-   - 'curl_download_source.msg is defined'
-   - '"you need python >= 2.7.9 on your managed machine" in curl_download_source.msg'
-   - 'curl_version_before.stdout.find(curl_compare) == -1'
+    - 'curl_version_before.stdout.find(curl_compare) == -1'
+    - 'ansible_python_version is version( "2.7.9", "<")'
 
 # Note: requires GNU-Tar &&|| unzip
 - name: "CURL | Unarchive"
@@ -92,6 +92,7 @@
     src: "{{ curl_path }}/curl/{{ curl_version }}.{{ curl_extension }}"
     dest: "{{ curl_path }}/curl/"
     creates: "{{ curl_path }}/curl/curl-{{ curl_version }}/README"
+    remote_src: yes
   when: 'curl_version_before.stdout.find(curl_compare) == -1'
 
 - name: "CURL | Build Configuration"
