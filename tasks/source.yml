@@ -75,7 +75,7 @@
     dest: "{{ curl_path }}/curl/{{ curl_version }}.{{ curl_extension }}"
   when: 
     - 'curl_version_before.stdout.find(curl_compare) == -1'
-    - 'ansible_python_version is version( "2.7.9", ">=")'
+    - 'ansible_python_version is version_compare( "2.7.9", ">=")'
 
 - name: "CURL | Insecurely download from source"
   get_url:
@@ -84,7 +84,7 @@
     validate_certs: false
   when:
     - 'curl_version_before.stdout.find(curl_compare) == -1'
-    - 'ansible_python_version is version( "2.7.9", "<")'
+    - 'ansible_python_version is version_compare( "2.7.9", "<")'
 
 # Note: requires GNU-Tar &&|| unzip
 - name: "CURL | Unarchive"
