@@ -2,28 +2,22 @@
 
 - name: "CURL | Install (CentOS)"
   yum:
-    name: "{{ item }}"
-    state: installed
-  with_items:
-    - curl
+    name: curl
+    state: present
   when:
     - ansible_os_family == "RedHat"
     - ansible_distribution == "CentOS"
 
 - name: "CURL | Install (Debian)"
   apt:
-    name: "{{ item }}"
-    state: installed
-  with_items:
-    - curl
+    name: curl
+    state: present
   when: ansible_os_family == "Debian"
 
 - name: "CURL | Install (RedHat)"
   dnf:
-    name: "{{ item }}"
-    state: installed
-  with_items:
-    - curl
+    name: curl
+    state: present
   when:
     - ansible_os_family == "RedHat"
     - ansible_distribution != "CentOS"
