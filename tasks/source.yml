@@ -119,6 +119,8 @@
   when: 'curl_version_before.stdout.find(curl_compare) == -1'
 
 - name: "CURL | Get current version"
+  environment:
+    PATH: "{{ ansible_env.PATH }}:/usr/local/bin/"
   shell: curl --version | cat
   register: curl_version_after
   changed_when: false
